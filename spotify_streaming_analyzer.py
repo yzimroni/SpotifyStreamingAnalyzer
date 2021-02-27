@@ -53,10 +53,14 @@ class SpotifyStreamingAnalyzer:
         # Aggregate results
         # Values are divided by 1000 to convert ms to seconds
         self.grouped_data = self.grouped_data.agg(
-            {"msPlayed": ["count", lambda x: int(x.sum() / 1000), lambda x: int((x.sum() / x.count()) / 1000)],
+            {"msPlayed": ["count", lambda x: int(x.sum() / 1000),  # TotalSecPlayed
+                          lambda x: int((x.sum() / x.count()) / 1000),  # AvgSecPerPlay
+                          lambda x: int(x.max() / 1000),  # MaxSecPlayed
+                          lambda x: int(((max(x.sum() / x.count(), 1)) / max(1, x.max())) * 100)],  # AvgPlayPercent
              "endTime": ["min", "max"]})
         # Rename columns
-        self.grouped_data.columns = ["Count", "TotalSecPlayed", "AvgSecPerPlay", "FirstPlayed", "LastPlayed"]
+        self.grouped_data.columns = ["Count", "TotalSecPlayed", "AvgSecPerPlay", "MaxSecPlayed", "AvgPlayPercent",
+                                     "FirstPlayed", "LastPlayed"]
 
     def filter_by_play_count(self, count):
         """
