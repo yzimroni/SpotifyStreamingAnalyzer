@@ -67,9 +67,9 @@ class SpotifyStreamingAnalyzerTestCase(unittest.TestCase):
         analyzer.generate_data_frame()
         analyzer.analyze()
         r = analyzer.get_result()
-        self.assertEqual({'Count': 6, 'TotalSecPlayed': 383, 'AvgSecPerPlay': 63, 'FirstPlayed': '2019-12-29 20:19', 'LastPlayed': '2020-04-19 17:14'}, r.iloc[4].to_dict())
-        self.assertEqual({'Count': 5, 'TotalSecPlayed': 175, 'AvgSecPerPlay': 35, 'FirstPlayed': '2019-12-29 20:12', 'LastPlayed': '2020-04-13 15:55'}, r.iloc[25].to_dict())
-        self.assertEqual({'Count': 22, 'TotalSecPlayed': 2690, 'AvgSecPerPlay': 122, 'FirstPlayed': '2020-02-06 18:19', 'LastPlayed': '2020-05-22 19:36'}, r.iloc[100].to_dict())
+        self.assertEqual({'Count': 6, 'TotalSecPlayed': 383, 'AvgSecPerPlay': 63, 'MaxSecPlayed': 182, 'AvgPlayPercent': 34, 'FirstPlayed': '2019-12-29 20:19', 'LastPlayed': '2020-04-19 17:14'}, r.iloc[4].to_dict())
+        self.assertEqual({'Count': 5, 'TotalSecPlayed': 175, 'AvgSecPerPlay': 35, 'MaxSecPlayed': 156, 'AvgPlayPercent': 22, 'FirstPlayed': '2019-12-29 20:12', 'LastPlayed': '2020-04-13 15:55'}, r.iloc[25].to_dict())
+        self.assertEqual({'Count': 22, 'TotalSecPlayed': 2690, 'AvgSecPerPlay': 122, 'MaxSecPlayed': 202, 'AvgPlayPercent': 60, 'FirstPlayed': '2020-02-06 18:19', 'LastPlayed': '2020-05-22 19:36'}, r.iloc[100].to_dict())
 
         # Sample 2 test
         analyzer = SpotifyStreamingAnalyzer()
@@ -77,9 +77,9 @@ class SpotifyStreamingAnalyzerTestCase(unittest.TestCase):
         analyzer.generate_data_frame()
         analyzer.analyze()
         r = analyzer.get_result()
-        self.assertEqual({'Count': 1, 'TotalSecPlayed': 285, 'AvgSecPerPlay': 285, 'FirstPlayed': '2020-12-21 12:41', 'LastPlayed': '2020-12-21 12:41'}, r.iloc[5].to_dict())
-        self.assertEqual({'Count': 1, 'TotalSecPlayed': 2, 'AvgSecPerPlay': 2, 'FirstPlayed': '2020-12-22 06:01', 'LastPlayed': '2020-12-22 06:01'}, r.iloc[25].to_dict())
-        self.assertEqual({'Count': 1, 'TotalSecPlayed': 172, 'AvgSecPerPlay': 172, 'FirstPlayed': '2020-12-22 08:57', 'LastPlayed': '2020-12-22 08:57'}, r.iloc[30].to_dict())
+        self.assertEqual({'Count': 1, 'TotalSecPlayed': 285, 'AvgSecPerPlay': 285, 'MaxSecPlayed': 285, 'AvgPlayPercent': 100, 'FirstPlayed': '2020-12-21 12:41', 'LastPlayed': '2020-12-21 12:41'}, r.iloc[5].to_dict())
+        self.assertEqual({'Count': 1, 'TotalSecPlayed': 2, 'AvgSecPerPlay': 2, 'MaxSecPlayed': 2, 'AvgPlayPercent': 100, 'FirstPlayed': '2020-12-22 06:01', 'LastPlayed': '2020-12-22 06:01'}, r.iloc[25].to_dict())
+        self.assertEqual({'Count': 1, 'TotalSecPlayed': 172, 'AvgSecPerPlay': 172, 'MaxSecPlayed': 172, 'AvgPlayPercent': 100, 'FirstPlayed': '2020-12-22 08:57', 'LastPlayed': '2020-12-22 08:57'}, r.iloc[30].to_dict())
 
     def test_filter_by_play_count(self):
         # Sample 1 test
